@@ -1,0 +1,27 @@
+---
+- hosts: linux
+  become: true
+  tasks:
+  
+    - name: Ping Zielsystem
+      ansible.builtin.ping:
+
+    - name: Zeige Hostname des Zielsystems
+      ansible.builtin.command: hostname
+      register: hostname_output
+
+    - name: Gib Hostname aus
+      ansible.builtin.debug:
+        msg: "Hostname auf {{ inventory_hostname }} ist {{ hostname_output.stdout }}"
+
+    - name: Erstelle Testdatei
+      ansible.builtin.file:
+        path: /tmp/ansible_test_{{ inventory_hostname }}
+        state: touch
+        mode: '0644'
+
+    - name: Zeige Systeminformationen
+      ansible.builtin.setup:
+        gather_subset:
+          - network
+          - hardware
