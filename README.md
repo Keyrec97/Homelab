@@ -5,7 +5,7 @@ Ansible Postinstall:
 
 SSH-Key Erstellen und in Semaphore eintragen:
 
-ssh-keygen
+ssh-keygen #Keine Passphrase vergeben!
 
 
 Auf Zielsystemen sudoers user einrichten:
